@@ -31,13 +31,38 @@ def goblin_dice(nbr_dice = 1,nbr_iter=20000):
     plt.plot((sum(result))        )
     plt.xlabel('number')
     plt.ylabel('nbr of times hit')
+
+def goblin_coin(nbr_dice = 1,nbr_iter=20000):
     
+    result = np.zeros((nbr_iter,10*nbr_dice))    
+    summa = 0
+    for ii in range(0,nbr_iter):            
+        while (summa<4):
+            for jj in range(0,nbr_dice):
+                # roll dices and sum them
+                tal = roll_coin(nbr_dice)                
+            summa += tal
+
+            result[ii,summa] = result[ii,summa] + 1
+        summa = 0
+        
+    plt.figure()
+    plt.title('%d coin'%nbr_dice)
+    plt.plot(sum(result),'bo'        )
+    plt.plot(sum(result)        )
+    plt.xlabel('number')
+    plt.ylabel('nbr of times hit')
+    
+        
     
     
 def roll_dice(nbr_dice=1):
     summa = np.sum(np.random.randint(1,7,size=nbr_dice))    
     return summa
 
+def roll_coin(nbr_dice=1):
+    summa = np.sum(np.random.randint(1,3,size=nbr_dice))    
+    return summa
 
 # on average, how many times must a dice be roll until a 6 turns up?
 def when_number(number,nbr_iter=100):
@@ -86,7 +111,9 @@ def prob_number(number=1,nbr_dice=3,nbr_iter=1000):
 
 if __name__ == '__main__':
     
-    goblin_dice(nbr_dice = 2,nbr_iter=100)
+    #goblin_dice(nbr_dice = 5,nbr_iter=10000)
+    
+    goblin_coin(nbr_dice = 1,nbr_iter=10000)
     
     print 'Roll a die'
     print roll_dice(nbr_dice=2)
